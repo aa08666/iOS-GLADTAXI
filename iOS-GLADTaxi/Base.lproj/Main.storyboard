@@ -279,7 +279,7 @@
         <!--Map Search View Controller-->
         <scene sceneID="G7Y-LQ-zR8">
             <objects>
-                <viewController storyboardIdentifier="page2" id="m61-7K-1Ku" customClass="MapSearchViewController" customModule="iOS_GLADTaxi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapHome" id="m61-7K-1Ku" customClass="MapSearchViewController" customModule="iOS_GLADTaxi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y4v-ww-3j2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -326,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLq-aT-zsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559" y="138"/>
+            <point key="canvasLocation" x="899" y="133"/>
         </scene>
     </scenes>
     <resources>
