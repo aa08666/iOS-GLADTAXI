@@ -19,12 +19,15 @@ class FBSendShortMessageViewController: UIViewController {
     @IBOutlet weak var teamCodeNumberTextField: UITextField!
     
     @IBAction func SendShortMessageButton(_ sender: UIButton) {
-        //TODO: call "FB-乘客註冊電話驗證" api
+        
         guard let sendShortMessage = sendShortMessageTextField.text else {return}
-        let url = "https://staging.ap.gladmobile.com/app/api/passengersendshortmessage"
+        
+        let url = "https://staging.ap.gladmobile.com/app/api/sendfbshortmessage/{?fbid}"
+        
         let body = [ "phoneNumber": sendShortMessage]
         
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+            
             do{
                 let json = try JSON(data: data)
                 guard let result = json["result"].string else {
@@ -48,7 +51,9 @@ class FBSendShortMessageViewController: UIViewController {
         guard let sendShortMessage = sendShortMessageTextField.text else {return}
         guard let verificationNumber = verificationNumberTextField.text else {return}
         guard let teamCodeNumber = teamCodeNumberTextField.text else {return}
+        
         let url = "https://staging.ap.gladmobile.com/app/api/fbregister/{?fbid}"
+        
         let body = ["phoneNumber":sendShortMessage, "verificationNumber":verificationNumber,"teamCode":teamCodeNumber]
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
             do{

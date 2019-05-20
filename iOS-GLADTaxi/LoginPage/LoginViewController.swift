@@ -12,9 +12,11 @@ import FacebookCore
 import FacebookLogin
 
 
-
-
-
+/**
+ 點擊 一般登入按鈕：
+ 如果此帳號(手機號碼)還尚未註冊，就跳 alert 提醒使用者尚未註冊
+ 如果此帳號(手機號碼)已註冊，就登入到 mapHome page
+ */
 class LoginViewController: UIViewController {
     
     let pushToIdentifierFBSendShortMessageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FBSendShortMessageVC")
@@ -35,13 +37,13 @@ class LoginViewController: UIViewController {
         
         let pushToPageMapHomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
         
-        //TODO: 忘記密碼 api (以 button 實作)
+        
         
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
             
             do {
                 let json = try JSON(data: data)
-                //TODO: 如果有 Responses 400 裡面的情形，就跳出相對的 alert 提醒使用者
+                
                 switch statusCode {
                 case 200:
                     
@@ -53,8 +55,10 @@ class LoginViewController: UIViewController {
                     self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
                     
                 case 400:
-                    if let errResultState1 = json["errResult"][0]["state"].string {
-                        
+                    
+                    if let errResultState1 = json["errResult"][0]["result"].string {
+                        self.alertFunc("失敗", "該乘客帳號並未註冊或密碼錯誤", "OK")
+                        print(errResultState1)
                     }else{
                         
                         print("等等處理")
@@ -99,12 +103,14 @@ class LoginViewController: UIViewController {
                 print("user log in")
                 
                 let checkFBUrl = "https://staging.ap.gladmobile.com/app/api/checkfbverification/{?fbid}"
+                
                 let fbLoginUrl = "https://staging.ap.gladmobile.com/app/api/fblogin/{?fbid}"
                 
-                //FIXME: ["fbToken": token] 後面那個 token 那樣帶有沒有問題
+                
+            
                 let body = ["fbToken": token]
                 
-                
+                //FIXME: ["fbToken": token] 後面那個 token 應該改成 fb userID
                 Request.postRequest(urlString: checkFBUrl, body: body, callBack: { (data, statusCode) in
                     switch statusCode {
                     // FB 已有註冊
@@ -143,8 +149,7 @@ class LoginViewController: UIViewController {
                             // 失敗，因為該FB帳號尚未註冊
                             if  let errResultState = json["errResult"][0]["state"].string {
                                 print(errResultState)
-                                self.alertFunc("登入失敗", "此 FaceBook 帳號尚未註冊會員，請先完成註冊。", "OK")
-                                self.navigationController?.pushViewController(self.pushToIdentifierFBSendShortMessageVC, animated: true)
+                     self.navigationController?.pushViewController(self.pushToIdentifierFBSendShortMessageVC, animated: true)
                             } else{
                                 
                                 print("errResultState1 解析失敗")
@@ -155,7 +160,7 @@ class LoginViewController: UIViewController {
                             
                         }
                     default:
-                        print("怎麼會跑到這邊來!!!")
+                        print("程式怎麼會跑到這邊來!!!")
                     }
                     
                 })
@@ -165,7 +170,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+    //TODO: 忘記密碼 api (以 button 實作)
     
     
 }

@@ -95,8 +95,6 @@ class SignUpViewController: UIViewController {
     }
     
     
-    
-    
 }
 
 extension SignUpViewController {

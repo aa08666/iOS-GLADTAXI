@@ -49,7 +49,7 @@ struct Request {
     // POST
     static func postRequest(urlString: String, body: [String:Any], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
         
-        let url = URL(string: urlString)!
+        guard let url = URL(string: urlString) else {return}
         
         var urlRequest = URLRequest(url: url)
         

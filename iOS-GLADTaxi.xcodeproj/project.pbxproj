@@ -84,9 +84,9 @@
 			children = (
 				908885642265C0BF0030BC13 /* APIRequest.swift */,
 				9088854E2265BE2E0030BC13 /* AppDelegate.swift */,
+				908885602265BE3E0030BC13 /* LoginPage */,
 				90C8F5FD227FC7180096C77C /* SignUpPage */,
 				908885612265BE550030BC13 /* MapSearch */,
-				908885602265BE3E0030BC13 /* LoginPage */,
 				908885522265BE2E0030BC13 /* Main.storyboard */,
 				908885552265BE310030BC13 /* Assets.xcassets */,
 				908885572265BE310030BC13 /* LaunchScreen.storyboard */,
