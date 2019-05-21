@@ -18,6 +18,7 @@ class FBSendShortMessageViewController: UIViewController {
 
     @IBOutlet weak var teamCodeNumberTextField: UITextField!
     
+    
     @IBAction func SendShortMessageButton(_ sender: UIButton) {
         
         guard let sendShortMessage = sendShortMessageTextField.text else {return}

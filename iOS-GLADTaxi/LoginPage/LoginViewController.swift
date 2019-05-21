@@ -17,7 +17,7 @@ import FacebookLogin
  如果此帳號(手機號碼)還尚未註冊，就跳 alert 提醒使用者尚未註冊
  如果此帳號(手機號碼)已註冊，就登入到 mapHome page
  */
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let pushToIdentifierFBSendShortMessageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FBSendShortMessageVC")
     
@@ -41,37 +41,40 @@ class LoginViewController: UIViewController {
         
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
             
-            do {
-                let json = try JSON(data: data)
-                
-                switch statusCode {
-                case 200:
-                    
-                    guard let success = json["result"]["success"].bool else {
-                        print("no success bool")
-                        return
-                    }
-                    print(success)
-                    self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
-                    
-                case 400:
-                    
-                    if let errResultState1 = json["errResult"][0]["result"].string {
-                        self.alertFunc("失敗", "該乘客帳號並未註冊或密碼錯誤", "OK")
-                        print(errResultState1)
-                    }else{
+            DispatchQueue.main.async {
+                do {
+                    print(data)
+                    let json = try JSON(data: data)
+                    print(json)
+                    switch statusCode {
+                    case 200:
                         
-                        print("等等處理")
+                        guard let success = json["result"]["success"].bool else {
+                            print("no success bool")
+                            return
+                        }
+                        print(success)
+                        self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
+                        
+                    case 400:
+                        
+                        if let errResultState1 = json["errResult"][0]["result"].string {
+                            self.alertFunc("失敗", "該乘客帳號並未註冊或密碼錯誤", "OK")
+                            print(errResultState1)
+                        }else{
+                            
+                            print("等等處理")
+                        }
+                    default:
+                        print("黑人問號")
                     }
-                default:
-                    print("黑人問號")
+                    
+                    
+                    
+                    
+                }catch{
+                    print(error.localizedDescription)
                 }
-                
-                
-                
-                
-            }catch{
-                print(error.localizedDescription)
             }
             
         }
@@ -80,14 +83,24 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     /**
-    點擊 FB 登入按鈕：
-    如果此 FB 還尚未註冊，就轉到 FBSendShortMessageViewController 裡面進行註冊
-    如果此 FB 還已註冊，就 call "FB-乘客登入" api 並轉入到 mapHome
-    */
+     點擊 FB 登入按鈕：
+     如果此 FB 還尚未註冊，就轉到 FBSendShortMessageViewController 裡面進行註冊
+     如果此 FB 還已註冊，就 call "FB-乘客登入" api 並轉入到 mapHome
+     */
     @IBAction func FBLoginButton(_ sender: UIButton) {
         let pushToMapHomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
         
@@ -107,7 +120,7 @@ class LoginViewController: UIViewController {
                 let fbLoginUrl = "https://staging.ap.gladmobile.com/app/api/fblogin/{?fbid}"
                 
                 
-            
+                
                 let body = ["fbToken": token]
                 
                 //FIXME: ["fbToken": token] 後面那個 token 應該改成 fb userID
@@ -149,7 +162,7 @@ class LoginViewController: UIViewController {
                             // 失敗，因為該FB帳號尚未註冊
                             if  let errResultState = json["errResult"][0]["state"].string {
                                 print(errResultState)
-                     self.navigationController?.pushViewController(self.pushToIdentifierFBSendShortMessageVC, animated: true)
+                                self.navigationController?.pushViewController(self.pushToIdentifierFBSendShortMessageVC, animated: true)
                             } else{
                                 
                                 print("errResultState1 解析失敗")

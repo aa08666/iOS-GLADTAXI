@@ -23,15 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey(googleApikey)
         return true
+        
     }
-    
- 
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let handle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
-        return handle
-    }
-  
-
+   
 }
 
