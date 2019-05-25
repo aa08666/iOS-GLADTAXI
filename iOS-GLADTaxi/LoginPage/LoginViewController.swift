@@ -25,57 +25,42 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    
     @IBAction func loginAction(_ sender: UIButton) {
         
         guard let username = usernameTextField.text else {return}
-        
         guard let password = passwordTextField.text else {return}
         
         let url = "https://staging.ap.gladmobile.com/app/api/passengerlogin"
         
-        let body = ["account": username, "password": password]
+        let body = ["account": username, "password": password, "register":"1"]
         
         let pushToPageMapHomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
-        
-        
-        
+       
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
             
-            DispatchQueue.main.async {
+            if statusCode == 200 {
+                
                 do {
-                    print(data)
                     let json = try JSON(data: data)
-                    print(json)
-                    switch statusCode {
-                    case 200:
-                        
-                        guard let success = json["result"]["success"].bool else {
-                            print("no success bool")
-                            return
-                        }
-                        print(success)
-                        self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
-                        
-                    case 400:
-                        
-                        if let errResultState1 = json["errResult"][0]["result"].string {
-                            self.alertFunc("失敗", "該乘客帳號並未註冊或密碼錯誤", "OK")
-                            print(errResultState1)
+                    if let success = json["result"]["success"].bool {
+                        if success == true {
+                            self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
                         }else{
-                            
-                            print("等等處理")
+                            print("解析失敗")
                         }
-                    default:
-                        print("黑人問號")
                     }
-                    
-                    
-                    
                     
                 }catch{
                     print(error.localizedDescription)
                 }
             }
+            
+            if statusCode == 400 {
+                print("400")
+            }
+            
+
             
         }
         
@@ -93,7 +78,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+        self.view.endEditing(true) 
     }
     
     /**

@@ -16,6 +16,7 @@
 		908885672265C5390030BC13 /* MapSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908885662265C5390030BC13 /* MapSearchViewController.swift */; };
 		9088856D226EBDCC0030BC13 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088856C226EBDCC0030BC13 /* GooglePlace.swift */; };
 		90888572226F05550030BC13 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90888571226F05550030BC13 /* UIViewExtension.swift */; };
+		90BCC7802294FA7100EA1F49 /* LoginPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BCC77F2294FA7100EA1F49 /* LoginPageModel.swift */; };
 		90C8F5FF227FC7630096C77C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C8F5FE227FC7630096C77C /* SignUpViewController.swift */; };
 		90EE007922896CC000453E44 /* FBSendShortMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EE007822896CC000453E44 /* FBSendShortMessageViewController.swift */; };
 		D158F0BF50FF442285CFEC66 /* Pods_iOS_GLADTaxi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B82C9C9BC7F7F6B0F55136E /* Pods_iOS_GLADTaxi.framework */; };
@@ -36,6 +37,7 @@
 		908885662265C5390030BC13 /* MapSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchViewController.swift; sourceTree = "<group>"; };
 		9088856C226EBDCC0030BC13 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		90888571226F05550030BC13 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		90BCC77F2294FA7100EA1F49 /* LoginPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageModel.swift; sourceTree = "<group>"; };
 		90C8F5FE227FC7630096C77C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		90EE007822896CC000453E44 /* FBSendShortMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSendShortMessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 			children = (
 				908885622265BF600030BC13 /* LoginViewController.swift */,
 				90EE007822896CC000453E44 /* FBSendShortMessageViewController.swift */,
+				90BCC77F2294FA7100EA1F49 /* LoginPageModel.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				90888572226F05550030BC13 /* UIViewExtension.swift in Sources */,
 				908885672265C5390030BC13 /* MapSearchViewController.swift in Sources */,
 				90EE007922896CC000453E44 /* FBSendShortMessageViewController.swift in Sources */,
+				90BCC7802294FA7100EA1F49 /* LoginPageModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

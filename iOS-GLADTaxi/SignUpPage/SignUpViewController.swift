@@ -91,39 +91,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         
         let url = "https://staging.ap.gladmobile.com/app/api/passengerregister"
+        
         let body:[String:Any] = [
             "phoneNumber":phoneNumber,
             "verificationNumber":verficationNumber,
-            "name":name,
-            "password":password,
-            "email":email,
             "teamCode":teamCode,
-            "gender":genderSegment.selectedSegmentIndex
+            "name":name,
+            "email":email,
+            "gender":genderSegment.selectedSegmentIndex,
+            "password":password
         ]
         
         Request.postRequest(urlString: url, body: body) { (data, statusCode) in
-            do {
-                let json = try JSON(data: data)
-                
-                guard let result = json["result"].string else {
-                    print("註冊失敗")
-                    return
-                }
-                print(result)
+            if statusCode == 200 {
                 self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
-                
-                
-            }catch{
-                print(error.localizedDescription)
+            }
+            
+            if statusCode == 400 {
+                print("YAYAY")
             }
             
         }
+        
     }
-    
-    
-    
-    
-    
 }
 
 extension SignUpViewController {
@@ -142,3 +132,4 @@ extension SignUpViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
+
