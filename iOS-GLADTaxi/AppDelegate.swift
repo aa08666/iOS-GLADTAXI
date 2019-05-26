@@ -18,13 +18,19 @@ let googleApikey = "AIzaSyA4v1pdhTR43JbRgRh21behSk1MZwlH1uU"
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey(googleApikey)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
         
     }
-   
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handle = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        return handle
+    }
+    
 }
 

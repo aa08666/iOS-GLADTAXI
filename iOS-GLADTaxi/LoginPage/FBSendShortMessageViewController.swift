@@ -22,12 +22,11 @@ class FBSendShortMessageViewController: UIViewController {
     @IBAction func SendShortMessageButton(_ sender: UIButton) {
         
         guard let sendShortMessage = sendShortMessageTextField.text else {return}
-        
-        let url = "https://staging.ap.gladmobile.com/app/api/sendfbshortmessage/{?fbid}"
+     
         
         let body = [ "phoneNumber": sendShortMessage]
         
-        Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+        Request.postRequest(Url.url, LoginAPIs.sendFBShortMessage, body: body) { (data, statusCode) in
             
             do{
                 let json = try JSON(data: data)
@@ -53,10 +52,10 @@ class FBSendShortMessageViewController: UIViewController {
         guard let verificationNumber = verificationNumberTextField.text else {return}
         guard let teamCodeNumber = teamCodeNumberTextField.text else {return}
         
-        let url = "https://staging.ap.gladmobile.com/app/api/fbregister/{?fbid}"
+      
         
         let body = ["phoneNumber":sendShortMessage, "verificationNumber":verificationNumber,"teamCode":teamCodeNumber]
-        Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+        Request.postRequest(Url.url, LoginAPIs.fbRegister, body: body) { (data, statusCode) in
             do{
                 
             }catch{

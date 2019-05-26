@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		903AD2FA229A912300DE4F30 /* FBLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903AD2F9229A912300DE4F30 /* FBLoginModel.swift */; };
 		9088854F2265BE2E0030BC13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088854E2265BE2E0030BC13 /* AppDelegate.swift */; };
 		908885542265BE2E0030BC13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 908885522265BE2E0030BC13 /* Main.storyboard */; };
 		908885562265BE310030BC13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 908885552265BE310030BC13 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		08EAC4AEAE3EA1480FAE2857 /* Pods-iOS-GLADTaxi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-GLADTaxi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-GLADTaxi/Pods-iOS-GLADTaxi.debug.xcconfig"; sourceTree = "<group>"; };
 		59F203224311B0260367295B /* Pods-iOS-GLADTaxi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-GLADTaxi.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-GLADTaxi/Pods-iOS-GLADTaxi.release.xcconfig"; sourceTree = "<group>"; };
 		8B82C9C9BC7F7F6B0F55136E /* Pods_iOS_GLADTaxi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_GLADTaxi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		903AD2F9229A912300DE4F30 /* FBLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginModel.swift; sourceTree = "<group>"; };
 		9088854B2265BE2E0030BC13 /* iOS-GLADTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-GLADTaxi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9088854E2265BE2E0030BC13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		908885532265BE2E0030BC13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				908885622265BF600030BC13 /* LoginViewController.swift */,
 				90EE007822896CC000453E44 /* FBSendShortMessageViewController.swift */,
 				90BCC77F2294FA7100EA1F49 /* LoginPageModel.swift */,
+				903AD2F9229A912300DE4F30 /* FBLoginModel.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				908885652265C0BF0030BC13 /* APIRequest.swift in Sources */,
 				90C8F5FF227FC7630096C77C /* SignUpViewController.swift in Sources */,
 				9088856D226EBDCC0030BC13 /* GooglePlace.swift in Sources */,
+				903AD2FA229A912300DE4F30 /* FBLoginModel.swift in Sources */,
 				908885632265BF600030BC13 /* LoginViewController.swift in Sources */,
 				9088854F2265BE2E0030BC13 /* AppDelegate.swift in Sources */,
 				90888572226F05550030BC13 /* UIViewExtension.swift in Sources */,

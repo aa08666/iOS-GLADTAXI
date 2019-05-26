@@ -46,11 +46,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         guard let phoneNumber = phoneNumberTextField.text else {return}
         
-        let url = "https://staging.ap.gladmobile.com/app/api/passengersendshortmessage"
         
         let body = ["phoneNumber":phoneNumber]
         
-        Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+        Request.postRequest(Url.url, SignAPIs.passengerSendShortMessage, body: body) { (data, statusCode) in
             
             do {
                 
@@ -90,7 +89,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         let pushToPageMapHomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
         
         
-        let url = "https://staging.ap.gladmobile.com/app/api/passengerregister"
+      
         
         let body:[String:Any] = [
             "phoneNumber":phoneNumber,
@@ -102,7 +101,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             "password":password
         ]
         
-        Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+        Request.postRequest(Url.url, SignAPIs.passengerRegister, body: body) { (data, statusCode) in
             if statusCode == 200 {
                 self.navigationController?.pushViewController(pushToPageMapHomeVC, animated: true)
             }

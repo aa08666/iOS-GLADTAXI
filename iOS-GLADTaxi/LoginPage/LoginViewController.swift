@@ -31,13 +31,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard let username = usernameTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         
-        let url = "https://staging.ap.gladmobile.com/app/api/passengerlogin"
+       
         
         let body = ["account": username, "password": password, "register":"1"]
         
         let pushToPageMapHomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
        
-        Request.postRequest(urlString: url, body: body) { (data, statusCode) in
+        Request.postRequest(Url.url, LoginAPIs.passengerLogin, body: body) { (data, statusCode) in
             
             if statusCode == 200 {
                 
@@ -87,86 +87,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
      如果此 FB 還已註冊，就 call "FB-乘客登入" api 並轉入到 mapHome
      */
     @IBAction func FBLoginButton(_ sender: UIButton) {
-        let pushToMapHomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapHome")
+     
+        FacebookLogin.login(self)
         
-        let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: [.publicProfile,.email,.userFriends], viewController: self) { (loginResult) in
-            
-            switch loginResult{
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("the user cancels login")
-            case .success(grantedPermissions: _, declinedPermissions: _, token: let token):
-                print("user log in")
-                
-                let checkFBUrl = "https://staging.ap.gladmobile.com/app/api/checkfbverification/{?fbid}"
-                
-                let fbLoginUrl = "https://staging.ap.gladmobile.com/app/api/fblogin/{?fbid}"
-                
-                
-                
-                let body = ["fbToken": token]
-                
-                //FIXME: ["fbToken": token] 後面那個 token 應該改成 fb userID
-                Request.postRequest(urlString: checkFBUrl, body: body, callBack: { (data, statusCode) in
-                    switch statusCode {
-                    // FB 已有註冊
-                    case 200:
-                        do{
-                            let json = try JSON(data: data)
-                            guard let registerSuccess = json["result"].string else {
-                                print("registerSuccess 解析失敗")
-                                return
-                            }
-                            print(registerSuccess)
-                            
-                            // FB 登入
-                            Request.postRequest(urlString: fbLoginUrl, body: body, callBack: { (data, statusCode) in
-                                do{
-                                    let json = try JSON(data: data)
-                                    if let success = json["result"]["success"].bool {
-                                        self.navigationController?.pushViewController(pushToMapHomeViewController, animated: true)
-                                        print(success)
-                                    }else{
-                                        print("success 解析失敗")
-                                        
-                                    }
-                                }catch{
-                                    
-                                }
-                            })
-                            
-                        }catch{
-                            print(error.localizedDescription)
-                        }
-                    // FB 尚未註冊
-                    case 400:
-                        do{
-                            let json = try JSON(data: data)
-                            // 失敗，因為該FB帳號尚未註冊
-                            if  let errResultState = json["errResult"][0]["state"].string {
-                                print(errResultState)
-                                self.navigationController?.pushViewController(self.pushToIdentifierFBSendShortMessageVC, animated: true)
-                            } else{
-                                
-                                print("errResultState1 解析失敗")
-                                return
-                            }
-                            
-                        }catch{
-                            
-                        }
-                    default:
-                        print("程式怎麼會跑到這邊來!!!")
-                    }
-                    
-                })
-                
-                
-                
-            }
-        }
     }
     //TODO: 忘記密碼 api (以 button 實作)
     

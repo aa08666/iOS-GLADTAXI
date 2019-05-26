@@ -8,17 +8,45 @@
 
 import Foundation
 
+struct Url {
+    
+    static let url = "https://staging.ap.gladmobile.com/app/"
+}
+
+struct SignAPIs {
+    
+    static let passengerSendShortMessage  = "api/passengersendshortmessage"
+    
+    static let passengerRegister  = "api/passengerregister"
+}
+
+struct LoginAPIs {
+    
+    static let passengerLogin  = "api/passengerlogin"
+    
+    static let checkFBVerification  = "api/checkfbverification/{?fbid}"
+    
+    static let fbPassengerLogin  = "api/fblogin/{?fbid}"
+    
+    static let sendFBShortMessage = "api/sendfbshortmessage/{?fbid}"
+    
+    static let fbRegister = "api/fbregister/{?fbid}"
+}
+
+
+
+
 struct Request {
    
     // GET
-    static func getRequest(api:String, callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
+    static func getRequest(_ url: String, _  api:String, callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
         
-        guard let url = URL(string:  api) else {
+        guard let urlApi = URL(string: url + api) else {
             print("Error: cannot create URL")
             return
         }
         
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: urlApi)
         
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -47,11 +75,11 @@ struct Request {
     }
     
     // POST
-    static func postRequest(urlString: String, body: [String:Any], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
+    static func postRequest(_ url: String, _ api: String , body: [String:Any], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
         
-        guard let url = URL(string: urlString) else {return}
+        guard let urlApi = URL(string: url + api) else {return}
         
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: urlApi)
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -82,11 +110,11 @@ struct Request {
     }
     
     // DELETE
-    static func deleteRequest(api:String, header:[String:String], body: [String: Any], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
+    static func deleteRequest(_ url: String, _ api:String, header:[String:String], body: [String: Any], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
         
-        guard let url = URL(string:  api) else { return }
+        guard let urlApi = URL(string: url + api) else { return }
         
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: urlApi)
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -116,7 +144,7 @@ struct Request {
     }
     
     //PUT
-    static func putRequest(api:String, header:[String:String], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
+    static func putRequest(_ url: String,_ api:String, header:[String:String], callBack: @escaping (_ data: Data, _ statusCode: Int) -> Void){
         
         guard let url = URL(string:  api) else { return }
         
